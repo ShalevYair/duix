@@ -301,8 +301,9 @@ function parseRSS(xmlText) {
 }
 
 /* ════════════════════════════════════════════════════════════
-   EXTRACTION REPORT
+   EXTRACTION REPORT — מושבת זמנית (source-bar הוחלף ב-url-bar)
 ════════════════════════════════════════════════════════════ */
+/*
 const METHOD_COLORS={
   'JSON-LD':'#10b981','RSS':'#10b981','OG-meta':'#3b82f6',
   'article-tags':'#3b82f6','containers':'#8b5cf6',
@@ -324,3 +325,4 @@ function showReport(url, method, arts) {
     <a href="${esc(url)}" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;">${esc(hostname)}</a>
   `;
 }
+*/

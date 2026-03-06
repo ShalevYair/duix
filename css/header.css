@@ -8,31 +8,58 @@ header {
   position:sticky; top:0; z-index:999; box-shadow:0 2px 16px rgba(0,0,0,0.45);
 }
 .header-logo-wrap { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
-header .duix-logo { font-size:1.35rem; }
-.change-style-btn { background:transparent; border:1px solid rgba(255,255,255,0.18); color:rgba(255,255,255,0.5); padding:2px 8px; border-radius:5px; font-size:0.67rem; font-family:inherit; cursor:pointer; transition:all 0.18s; white-space:nowrap; }
-.change-style-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+
+/* לוגו = כפתור ניווט */
+header .duix-logo { font-size:1.35rem; cursor:pointer; transition:opacity 0.18s; user-select:none; }
+header .duix-logo:hover { opacity:0.7; }
+
+/* כפתור "שנה סגנון" — מושבת, לוגו הוא כפתור במקומו */
+/* .change-style-btn { ... } */
+
 .view-toggle { display:flex; background:rgba(255,255,255,0.09); border-radius:8px; padding:3px; gap:2px; overflow-x:auto; scrollbar-width:none; }
 .view-toggle::-webkit-scrollbar { display:none; }
 .toggle-btn { background:transparent; border:none; color:rgba(255,255,255,0.55); padding:5px 13px; border-radius:6px; cursor:pointer; font-size:0.8rem; font-family:inherit; font-weight:500; transition:all 0.18s; white-space:nowrap; flex-shrink:0; }
 .toggle-btn.active { background:#fff; color:var(--header-bg); font-weight:700; }
 .toggle-btn:hover:not(.active) { background:rgba(255,255,255,0.16); color:#fff; }
 .header-right { display:flex; align-items:center; gap:0.55rem; flex-shrink:0; }
-.count-badge { font-size:0.65rem; color:rgba(255,255,255,0.35); white-space:nowrap; }
 
-/* ── URL BAR ── */
-#url-bar {
-  background:var(--card-bg); border-bottom:1px solid var(--border);
-  padding:0.55rem 1rem; display:flex; align-items:center;
-  gap:0.75rem; flex-wrap:wrap;
+/* ── LIMIT SELECT (dropdown כמות כתבות) ── */
+.limit-select {
+  background:transparent; color:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.22); border-radius:6px;
+  padding:3px 6px; font-size:0.72rem; font-family:inherit;
+  cursor:pointer; outline:none; transition:border-color 0.18s;
+  -webkit-appearance:none; appearance:none;
+  padding-left:1.4rem; padding-right:0.5rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:left 5px center;
 }
+.limit-select:focus { border-color:rgba(255,255,255,0.5); }
+.limit-select option { background:var(--header-bg); color:#fff; }
+
+/* ── SOURCE BAR ── */
+#source-bar {
+  background:var(--card-bg); border-bottom:1px solid var(--border);
+  padding:0.5rem 1rem; overflow-x:auto; scrollbar-width:none;
+}
+#source-bar::-webkit-scrollbar { display:none; }
+#source-buttons { display:flex; gap:0.45rem; flex-wrap:nowrap; align-items:center; }
+
+.source-btn {
+  background:#f1f5f9; border:1px solid var(--border); color:var(--text);
+  padding:0.28rem 0.9rem; border-radius:20px; font-size:0.8rem;
+  font-family:inherit; font-weight:600; cursor:pointer;
+  white-space:nowrap; flex-shrink:0; transition:all 0.18s;
+}
+.source-btn:hover:not(.active) { background:var(--border); border-color:#cbd5e1; }
+.source-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+/* URL BAR — מושבת, סגנון שמור */
+/*
+#url-bar { background:var(--card-bg); border-bottom:1px solid var(--border); padding:0.55rem 1rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; }
 #url-form { display:flex; align-items:center; gap:0.5rem; flex:1; min-width:220px; }
 .url-bar-icon { font-size:0.9rem; flex-shrink:0; }
-#url-input {
-  flex:1; padding:0.38rem 0.75rem; border:1px solid var(--border);
-  border-radius:6px; font-size:0.82rem; font-family:monospace;
-  direction:ltr; text-align:left; outline:none; color:var(--text);
-  transition:border-color 0.18s; background:#fafbfc; min-width:0;
-}
+#url-input { flex:1; padding:0.38rem 0.75rem; border:1px solid var(--border); border-radius:6px; font-size:0.82rem; font-family:monospace; direction:ltr; text-align:left; outline:none; color:var(--text); transition:border-color 0.18s; background:#fafbfc; min-width:0; }
 #url-input:focus { border-color:var(--primary); background:#fff; }
 #url-input::placeholder { color:#94a3b8; font-family:'Segoe UI',sans-serif; font-size:0.78rem; }
 .url-submit { background:var(--primary); color:#fff; border:none; padding:0.38rem 0.9rem; border-radius:6px; font-size:0.8rem; font-family:inherit; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.18s; flex-shrink:0; }
@@ -41,6 +68,7 @@ header .duix-logo { font-size:1.35rem; }
 .method-badge { color:#fff; padding:1px 7px; border-radius:3px; font-size:0.62rem; font-weight:700; letter-spacing:0.3px; }
 .report-sep { color:var(--border); }
 .report-warn { color:#f59e0b; font-weight:600; }
+*/
 
 /* ── LOADING ── */
 #loading { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:58vh; gap:1.1rem; color:var(--muted); }
@@ -61,6 +89,6 @@ header .duix-logo { font-size:1.35rem; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:600px) {
-  .header-right { display:none; }
   header { gap:0.4rem; padding:0.6rem 0.75rem; }
+  .toggle-btn { padding:5px 9px; font-size:0.74rem; }
 }

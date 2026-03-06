@@ -30,8 +30,10 @@
 <div id="app">
   <header>
     <div class="header-logo-wrap">
-      <div class="duix-logo" style="font-size:1.35rem"><span class="d">D</span><span class="u">U</span><span class="i">I</span><span class="x">X</span></div>
-      <button class="change-style-btn" onclick="showOnboarding()">שנה סגנון</button>
+      <!-- לוגו = כפתור חזרה ל-onboarding (במקום "שנה סגנון") -->
+      <div class="duix-logo" onclick="showOnboarding()" title="שנה סגנון תצוגה">
+        <span class="d">D</span><span class="u">U</span><span class="i">I</span><span class="x">X</span>
+      </div>
     </div>
     <div class="view-toggle">
       <button class="toggle-btn" id="btn-list"     onclick="switchView('list')">≡&nbsp; כותרות</button>
@@ -40,11 +42,22 @@
       <button class="toggle-btn" id="btn-ticker"   onclick="switchView('ticker')">⚡&nbsp; תחתונה</button>
     </div>
     <div class="header-right">
-      <span class="count-badge" id="count-badge"></span>
+      <select id="article-limit" class="limit-select">
+        <option value="10">10 כתבות</option>
+        <option value="30" selected>30 כתבות</option>
+        <option value="50">50 כתבות</option>
+        <option value="100">100 כתבות</option>
+      </select>
     </div>
   </header>
 
-  <!-- URL BAR -->
+  <!-- SOURCE BAR — בחירת מקור חדשות -->
+  <div id="source-bar">
+    <div id="source-buttons"></div>
+  </div>
+
+  <!-- URL BAR — מושבת זמנית, קוד שמור להמשך -->
+  <!--
   <div id="url-bar">
     <form id="url-form" onsubmit="handleUrlSubmit(event)">
       <span class="url-bar-icon">🌐</span>
@@ -53,6 +66,7 @@
     </form>
     <div id="extraction-report"></div>
   </div>
+  -->
 
   <div id="loading"><div class="spinner"></div><div class="loading-text">טוען חדשות...</div></div>
 
