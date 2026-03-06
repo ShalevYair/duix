@@ -166,10 +166,8 @@ duix/
 | walla | וואלה | `rss.walla.co.il/feed/1` | news.walla.co.il |
 | mako | mako | RSS ייעודי | mako.co.il |
 | haaretz | הארץ | `cmlink/1.1473859` | haaretz.co.il |
-| calcalist | כלכליסט | `Rss.aspx` | calcalist.co.il |
 | globes | גלובס | `rssfeeds.aspx?fid=585` | globes.co.il |
 | israelhayom | ישראל היום | `rss.xml` | israelhayom.co.il |
-| kan | כאן חדשות | `Rss.aspx?Cat=9` | kan.org.il |
 
 לכל מקור: ניסיון RSS ראשון → HTML fallback עם פרסור גנרי.
 המקור האחרון שנבחר נשמר ב-`localStorage` ונטען אוטומטית בכניסה הבאה.

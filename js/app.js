@@ -18,10 +18,8 @@ const SOURCES = [
   { name:'walla',       label:'וואלה',        rss:'https://rss.walla.co.il/feed/1',                                                                               url:'https://news.walla.co.il/' },
   { name:'mako',        label:'mako',         rss:'https://rcs.mako.co.il/rss/31750a2610f26110VgnVCM1000005201000aRCRD.xml',                                      url:'https://www.mako.co.il/' },
   { name:'haaretz',     label:'הארץ',         rss:'https://www.haaretz.co.il/cmlink/1.1473859',                                                                   url:'https://www.haaretz.co.il/' },
-  { name:'calcalist',   label:'כלכליסט',      rss:'https://www.calcalist.co.il/Rss.aspx',                                                                         url:'https://www.calcalist.co.il/' },
   { name:'globes',      label:'גלובס',        rss:'https://www.globes.co.il/webservice/rss/rssfeeds.aspx?fid=585',                                                url:'https://www.globes.co.il/' },
   { name:'israelhayom', label:'ישראל היום',   rss:'https://www.israelhayom.co.il/rss.xml',                                                                        url:'https://www.israelhayom.co.il/' },
-  { name:'kan',         label:'כאן חדשות',    rss:'https://www.kan.org.il/Rss.aspx?Cat=9',                                                                        url:'https://www.kan.org.il/news/' },
 ];
 
 const PROXIES = [
