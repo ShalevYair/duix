@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>DUIX</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/onboarding.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/list.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/magazine.css">
+  <link rel="stylesheet" href="css/ticker.css">
+</head>
+<body>
+
+<!-- ═══ ONBOARDING ═══ -->
+<div id="onboarding">
+  <div class="duix-logo ob-logo"><span class="d">D</span><span class="u">U</span><span class="i">I</span><span class="x">X</span></div>
+  <div class="ob-tagline">Dynamic UI · UX &nbsp;•&nbsp; קורא חדשות חכם</div>
+  <div class="ob-question">איך אתה אוהב לקרוא חדשות?</div>
+  <div class="ob-cards" id="ob-cards"></div>
+  <div class="ob-hint">לחץ על הסגנון המועדף עליך כדי להמשיך</div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div id="app">
+  <header>
+    <div class="header-logo-wrap">
+      <div class="duix-logo" style="font-size:1.35rem"><span class="d">D</span><span class="u">U</span><span class="i">I</span><span class="x">X</span></div>
+      <button class="change-style-btn" onclick="showOnboarding()">שנה סגנון</button>
+    </div>
+    <div class="view-toggle">
+      <button class="toggle-btn" id="btn-list"     onclick="switchView('list')">≡&nbsp; כותרות</button>
+      <button class="toggle-btn" id="btn-cards"    onclick="switchView('cards')">⊞&nbsp; כרטיסיות</button>
+      <button class="toggle-btn" id="btn-magazine" onclick="switchView('magazine')">🗞&nbsp; מגזין</button>
+      <button class="toggle-btn" id="btn-ticker"   onclick="switchView('ticker')">⚡&nbsp; תחתונה</button>
+    </div>
+    <div class="header-right">
+      <span class="count-badge" id="count-badge"></span>
+    </div>
+  </header>
+
+  <!-- URL BAR -->
+  <div id="url-bar">
+    <form id="url-form" onsubmit="handleUrlSubmit(event)">
+      <span class="url-bar-icon">🌐</span>
+      <input type="text" id="url-input" placeholder="הכנס כתובת אתר חדשות (לדוגמה: ynet.co.il)" autocomplete="off" spellcheck="false" />
+      <button type="submit" class="url-submit">טען</button>
+    </form>
+    <div id="extraction-report"></div>
+  </div>
+
+  <div id="loading"><div class="spinner"></div><div class="loading-text">טוען חדשות...</div></div>
+
+  <div id="error-screen">
+    <div class="error-icon">⚠️</div>
+    <div class="error-title">שגיאת טעינה</div>
+    <div class="error-msg" id="error-msg"></div>
+    <button class="retry-btn" onclick="loadNews()">נסה שוב</button>
+  </div>
+
+  <div id="main-content">
+    <div id="list-view"></div>
+    <div id="cards-view"></div>
+    <div id="magazine-view"></div>
+    <div id="ticker-view"></div>
+  </div>
+</div>
+
+<script src="js/fetch.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/views.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+/* ══ VIEW 4 — TICKER ══ */
+#ticker-view { display:none; }
+.ticker-header { display:flex; align-items:center; gap:0.6rem; padding:0.45rem 0.85rem; background:var(--text); color:#fff; font-size:0.68rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-radius:7px 7px 0 0; }
+.ticker-header-label { display:flex; align-items:center; gap:0.4rem; }
+.ticker-pulse { width:6px; height:6px; background:#ef4444; border-radius:50%; animation:pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+.ticker-header-total { margin-right:auto; color:rgba(255,255,255,0.4); font-weight:400; font-size:0.62rem; letter-spacing:0; text-transform:none; }
+.ticker-list { border:1px solid var(--border); border-top:none; border-radius:0 0 7px 7px; overflow:hidden; }
+.ticker-item { display:flex; align-items:center; gap:0.55rem; padding:0.3rem 0.75rem; border-bottom:1px solid rgba(226,232,240,0.7); cursor:pointer; text-decoration:none; color:var(--text); overflow:hidden; transition:background 0.1s; }
+.ticker-item:last-child { border-bottom:none; }
+.ticker-item:hover { background:rgba(59,130,246,0.06); }
+.ticker-item:nth-child(even) { background:rgba(0,0,0,0.018); } .ticker-item:nth-child(even):hover { background:rgba(59,130,246,0.06); }
+.ticker-num { flex-shrink:0; min-width:1.7rem; font-size:0.62rem; color:rgba(100,116,139,0.6); font-variant-numeric:tabular-nums; text-align:center; font-weight:500; font-family:monospace; }
+.ticker-cat { flex-shrink:0; font-size:0.58rem; padding:1px 5px 2px; border-radius:3px; background:rgba(59,130,246,0.1); color:var(--primary); font-weight:700; white-space:nowrap; min-width:3.2rem; text-align:center; line-height:1.6; }
+.ticker-title { font-weight:650; font-size:0.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:0 0 38%; max-width:38%; line-height:1.8; }
+.ticker-sep { flex-shrink:0; color:var(--border); font-size:0.75rem; }
+.ticker-snippet { color:var(--muted); font-size:0.76rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; line-height:1.8; }
+@media(max-width:600px) {
+  .ticker-snippet,.ticker-sep { display:none; }
+  .ticker-title { flex:1; max-width:none; }
+}

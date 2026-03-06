@@ -1,0 +1,15 @@
+/* ══ VIEW 1 — LIST ══ */
+#list-view { flex-direction:column; }
+.list-item { border-bottom:1px solid var(--border); }
+.list-item:first-child { border-top:1px solid var(--border); }
+.list-header { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; padding:0.95rem 0; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
+.list-header:hover .list-title { color:var(--primary); }
+.list-title { font-size:1rem; font-weight:620; line-height:1.5; transition:color 0.18s; flex:1; }
+.chevron { color:var(--muted); font-size:0.85rem; margin-top:4px; flex-shrink:0; transition:transform 0.25s ease; display:inline-block; }
+.list-item.open .chevron { transform:rotate(180deg); }
+.list-body { max-height:0; overflow:hidden; transition:max-height 0.32s ease; }
+.list-item.open .list-body { max-height:260px; }
+.list-body-inner { padding-bottom:1.1rem; display:flex; flex-direction:column; gap:0.65rem; }
+.list-summary-text { color:var(--muted); font-size:0.875rem; line-height:1.65; padding-right:0.85rem; border-right:3px solid var(--primary); }
+.read-more { font-size:0.78rem; color:var(--primary); text-decoration:none; font-weight:600; align-self:flex-start; }
+.read-more:hover { text-decoration:underline; }

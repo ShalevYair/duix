@@ -1,0 +1,22 @@
+/* ══ ONBOARDING ══ */
+#onboarding {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:100vh; background:linear-gradient(155deg,#0f172a 0%,#1e1040 55%,#0c1a2e 100%);
+  padding:2.5rem 1rem; direction:rtl;
+}
+.ob-logo { font-size:3.8rem; margin-bottom:0.4rem; }
+.ob-tagline { font-size:0.72rem; color:rgba(255,255,255,0.35); letter-spacing:2px; text-transform:uppercase; margin-bottom:2.5rem; }
+.ob-question { font-size:1.25rem; font-weight:700; color:rgba(255,255,255,0.92); margin-bottom:1.75rem; text-align:center; }
+.ob-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; width:100%; max-width:920px; }
+.ob-card { background:#fff; border-radius:14px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:transform 0.22s ease,box-shadow 0.22s ease,border-color 0.18s; display:flex; flex-direction:column; }
+.ob-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.4); }
+.ob-card[data-view="list"]:hover     { border-color:var(--d); }
+.ob-card[data-view="cards"]:hover    { border-color:var(--u); }
+.ob-card[data-view="magazine"]:hover { border-color:var(--i); }
+.ob-card[data-view="ticker"]:hover   { border-color:var(--x); }
+.ob-card-header { display:flex; align-items:center; gap:0.45rem; padding:0.7rem 0.85rem 0.5rem; border-bottom:1px solid var(--border); background:#fafbfc; }
+.ob-card-icon { font-size:0.95rem; } .ob-card-name { font-size:0.82rem; font-weight:700; color:var(--text); }
+.ob-card-preview { flex:1; padding:0.6rem; background:#f8fafc; overflow:hidden; min-height:155px; max-height:155px; }
+.ob-card-desc { padding:0.5rem 0.85rem 0.7rem; font-size:0.7rem; color:var(--muted); text-align:center; line-height:1.4; }
+.ob-hint { margin-top:1.75rem; font-size:0.75rem; color:rgba(255,255,255,0.25); }
+@media(max-width:720px){ .ob-cards{grid-template-columns:repeat(2,1fr);} .ob-logo{font-size:2.8rem;} }

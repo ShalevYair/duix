@@ -1,0 +1,66 @@
+/* ══ APP SHELL ══ */
+#app { display:none; min-height:100vh; }
+
+/* ── HEADER ── */
+header {
+  background:var(--header-bg); padding:0.65rem 1.1rem;
+  display:flex; align-items:center; justify-content:space-between; gap:0.6rem;
+  position:sticky; top:0; z-index:999; box-shadow:0 2px 16px rgba(0,0,0,0.45);
+}
+.header-logo-wrap { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+header .duix-logo { font-size:1.35rem; }
+.change-style-btn { background:transparent; border:1px solid rgba(255,255,255,0.18); color:rgba(255,255,255,0.5); padding:2px 8px; border-radius:5px; font-size:0.67rem; font-family:inherit; cursor:pointer; transition:all 0.18s; white-space:nowrap; }
+.change-style-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.view-toggle { display:flex; background:rgba(255,255,255,0.09); border-radius:8px; padding:3px; gap:2px; overflow-x:auto; scrollbar-width:none; }
+.view-toggle::-webkit-scrollbar { display:none; }
+.toggle-btn { background:transparent; border:none; color:rgba(255,255,255,0.55); padding:5px 13px; border-radius:6px; cursor:pointer; font-size:0.8rem; font-family:inherit; font-weight:500; transition:all 0.18s; white-space:nowrap; flex-shrink:0; }
+.toggle-btn.active { background:#fff; color:var(--header-bg); font-weight:700; }
+.toggle-btn:hover:not(.active) { background:rgba(255,255,255,0.16); color:#fff; }
+.header-right { display:flex; align-items:center; gap:0.55rem; flex-shrink:0; }
+.count-badge { font-size:0.65rem; color:rgba(255,255,255,0.35); white-space:nowrap; }
+
+/* ── URL BAR ── */
+#url-bar {
+  background:var(--card-bg); border-bottom:1px solid var(--border);
+  padding:0.55rem 1rem; display:flex; align-items:center;
+  gap:0.75rem; flex-wrap:wrap;
+}
+#url-form { display:flex; align-items:center; gap:0.5rem; flex:1; min-width:220px; }
+.url-bar-icon { font-size:0.9rem; flex-shrink:0; }
+#url-input {
+  flex:1; padding:0.38rem 0.75rem; border:1px solid var(--border);
+  border-radius:6px; font-size:0.82rem; font-family:monospace;
+  direction:ltr; text-align:left; outline:none; color:var(--text);
+  transition:border-color 0.18s; background:#fafbfc; min-width:0;
+}
+#url-input:focus { border-color:var(--primary); background:#fff; }
+#url-input::placeholder { color:#94a3b8; font-family:'Segoe UI',sans-serif; font-size:0.78rem; }
+.url-submit { background:var(--primary); color:#fff; border:none; padding:0.38rem 0.9rem; border-radius:6px; font-size:0.8rem; font-family:inherit; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.18s; flex-shrink:0; }
+.url-submit:hover { background:var(--primary-dk); }
+#extraction-report { display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; font-size:0.71rem; color:var(--muted); }
+.method-badge { color:#fff; padding:1px 7px; border-radius:3px; font-size:0.62rem; font-weight:700; letter-spacing:0.3px; }
+.report-sep { color:var(--border); }
+.report-warn { color:#f59e0b; font-weight:600; }
+
+/* ── LOADING ── */
+#loading { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:58vh; gap:1.1rem; color:var(--muted); }
+.spinner { width:42px; height:42px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin 0.72s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg);} }
+.loading-text { font-size:0.88rem; }
+
+/* ── ERROR ── */
+#error-screen { display:none; text-align:center; padding:4rem 2rem; max-width:480px; margin:0 auto; }
+.error-icon { font-size:2.8rem; margin-bottom:0.7rem; }
+.error-title { font-size:1.15rem; font-weight:700; color:#dc2626; margin-bottom:0.45rem; }
+.error-msg { color:var(--muted); font-size:0.88rem; line-height:1.6; margin-bottom:1.4rem; white-space:pre-wrap; }
+.retry-btn { background:var(--primary); color:#fff; border:none; padding:0.55rem 1.75rem; border-radius:8px; font-size:0.88rem; font-family:inherit; font-weight:600; cursor:pointer; }
+.retry-btn:hover { background:var(--primary-dk); }
+
+/* ── MAIN ── */
+#main-content { display:none; max-width:960px; margin:0 auto; padding:1.5rem 1rem 3rem; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px) {
+  .header-right { display:none; }
+  header { gap:0.4rem; padding:0.6rem 0.75rem; }
+}

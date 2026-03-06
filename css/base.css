@@ -1,0 +1,17 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary:#3b82f6; --primary-dk:#2563eb; --bg:#f1f5f9;
+  --card-bg:#fff; --header-bg:#0f172a; --text:#1e293b;
+  --muted:#64748b; --border:#e2e8f0; --radius:12px;
+  --serif:'Noto Serif Hebrew','Narkisim',Georgia,serif;
+  --d:#3b82f6; --u:#8b5cf6; --i:#f59e0b; --x:#10b981;
+}
+body { font-family:'Segoe UI',Arial,'Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); direction:rtl; min-height:100vh; }
+
+/* ── DUIX LOGO ── */
+.duix-logo { font-weight:900; letter-spacing:0.08em; line-height:1; }
+.duix-logo .d{color:var(--d)} .duix-logo .u{color:var(--u)} .duix-logo .i{color:var(--i)} .duix-logo .x{color:var(--x)}
+
+/* ══ UTILS ══ */
+.fade-in { animation:fadeUp 0.3s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(7px);} to{opacity:1;transform:translateY(0);} }
