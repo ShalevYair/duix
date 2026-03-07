@@ -52,5 +52,5 @@ function selectView(view) {
   document.getElementById('onboarding').style.display='none';
   document.getElementById('app').style.display='block';
   switchView(view);
-  if (!newsLoaded) loadNews();
+  if (!newsLoaded) loadAllSources();
 }

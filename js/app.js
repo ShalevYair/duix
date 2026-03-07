@@ -4,14 +4,12 @@
 let articles     = [];
 let currentView  = 'list';
 let newsLoaded   = false;
-let currentSource = null;   // שם המקור הפעיל
 let articleLimit  = 30;     // כמות כתבות להצגה
 const LS_KEY     = 'duix_preferred_view';
-const LS_SOURCE  = 'duix_last_source';
 const ALL_VIEWS  = ['list','cards','magazine','ticker'];
 
 /* ════════════════════════════════════════════════════════════
-   SOURCES — 8 מקורות חדשות עם RSS + HTML fallback
+   SOURCES — 10 מקורות חדשות עם RSS + HTML fallback
 ════════════════════════════════════════════════════════════ */
 const SOURCES = [
   { name:'ynet',        label:'ynet',        rss:'https://www.ynet.co.il/Integration/StoryRss1854.xml',                                                          url:'https://www.ynet.co.il/' },
@@ -33,47 +31,50 @@ const PROXIES = [
 ];
 
 /* ════════════════════════════════════════════════════════════
-   SOURCE BAR — בניית כפתורי מקורות
+   SOURCE BAR — כפתורי סטטוס (ללא בחירה)
 ════════════════════════════════════════════════════════════ */
 function buildSourceButtons() {
   const container = document.getElementById('source-buttons');
   SOURCES.forEach(src => {
     const btn = document.createElement('button');
-    btn.className = 'source-btn';
+    btn.className = 'source-btn src-idle';
     btn.textContent = src.label;
     btn.dataset.name = src.name;
-    btn.addEventListener('click', () => selectSource(src));
     container.appendChild(btn);
   });
 }
 
-function selectSource(src) {
-  currentSource = src.name;
-  localStorage.setItem(LS_SOURCE, src.name);
-  // עדכון כפתור active
-  document.querySelectorAll('.source-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.name === src.name)
-  );
-  newsLoaded = false;
-  loadNews(src);
+function setSourceStatus(name, status) {
+  const btn = document.querySelector(`.source-btn[data-name="${name}"]`);
+  if (!btn) return;
+  btn.classList.remove('src-idle','src-loading','src-done','src-error');
+  btn.classList.add(`src-${status}`);
 }
 
 /* ════════════════════════════════════════════════════════════
-   LOAD NEWS — RSS ראשון, HTML fallback
+   PARALLEL LOAD — כל המקורות בו-זמנית, רינדור מדורג
 ════════════════════════════════════════════════════════════ */
-async function loadNews(src) {
-  // קריאה ללא ארגומנט (retry / onboarding) — מצא מקור נוכחי
-  if (!src) {
-    src = SOURCES.find(s => s.name === currentSource) || SOURCES[0];
-  }
-  setAppState('loading');
+function addArticlesFromSource(newArts) {
+  const existingTitles = new Set(articles.map(a => a.title));
+  const fresh = newArts.filter(a => a.title && !existingTitles.has(a.title));
+  if (!fresh.length) return;
+  articles = [...articles, ...fresh];
+  newsLoaded = true;
+  renderAll();
+  setAppState('content');
+}
+
+async function loadOneSource(src) {
+  setSourceStatus(src.name, 'loading');
 
   // ניסיון RSS
   try {
     const rss = await fetchViaProxy(src.rss);
     const parsed = parseRSS(rss);
     if (parsed.length >= 2) {
-      return applyArticles(parsed);
+      addArticlesFromSource(parsed);
+      setSourceStatus(src.name, 'done');
+      return;
     }
   } catch(e) { /* נסה HTML */ }
 
@@ -82,11 +83,26 @@ async function loadNews(src) {
     const html = await fetchViaProxy(src.url);
     const { articles: parsed } = parseGeneric(html, src.url);
     if (parsed.length >= 2) {
-      return applyArticles(parsed);
+      addArticlesFromSource(parsed);
+      setSourceStatus(src.name, 'done');
+      return;
     }
   } catch(e) { /* נכשל */ }
 
-  setAppState('error', `שגיאה בטעינת ${src.label}.\nנסה מקור אחר.`);
+  setSourceStatus(src.name, 'error');
+}
+
+async function loadAllSources() {
+  articles  = [];
+  newsLoaded = false;
+  setAppState('loading');
+  SOURCES.forEach(src => setSourceStatus(src.name, 'loading'));
+
+  await Promise.allSettled(SOURCES.map(src => loadOneSource(src)));
+
+  if (!newsLoaded) {
+    setAppState('error', 'לא ניתן היה לטעון אף מקור חדשות.\nבדוק את החיבור לאינטרנט ונסה שוב.');
+  }
 }
 
 /* URL BAR — מושבת זמנית, קוד שמור
@@ -105,13 +121,6 @@ function handleUrlSubmit(e) {
 /* ════════════════════════════════════════════════════════════
    STATE HELPERS
 ════════════════════════════════════════════════════════════ */
-function applyArticles(parsed) {
-  articles = parsed;
-  newsLoaded = true;
-  renderAll();
-  setAppState('content');
-}
-
 function setAppState(state, msg) {
   document.getElementById('loading').style.display      = state === 'loading' ? 'flex'  : 'none';
   document.getElementById('error-screen').style.display = state === 'error'   ? 'block' : 'none';
@@ -167,21 +176,13 @@ function esc(str) {
 buildOnboarding();
 buildSourceButtons();
 
-const savedView   = localStorage.getItem(LS_KEY);
-const savedSource = localStorage.getItem(LS_SOURCE);
-
-// בחר מקור שמור — או ברירת מחדל (ynet)
-const initSrc = SOURCES.find(s => s.name === savedSource) || SOURCES[0];
-currentSource = initSrc.name;
-document.querySelectorAll('.source-btn').forEach(b =>
-  b.classList.toggle('active', b.dataset.name === initSrc.name)
-);
+const savedView = localStorage.getItem(LS_KEY);
 
 if (savedView && ALL_VIEWS.includes(savedView)) {
   // משתמש חוזר — דלג על onboarding
   document.getElementById('onboarding').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   switchView(savedView);
-  loadNews(initSrc);
+  loadAllSources();
 }
 // else: onboarding מוצג כברירת מחדל
