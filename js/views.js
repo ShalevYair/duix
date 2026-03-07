@@ -28,13 +28,13 @@ function createCardEl(article, i) {
   card.className = 'card fade-in'; card.href = article.link || '#'; card.target = '_blank'; card.rel = 'noopener noreferrer';
   card.style.animationDelay = `${Math.min(i * 25, 350)}ms`;
   card.innerHTML = `
-    <div class="card-media">${article.image ? `<img src="${esc(article.image)}" alt="${esc(article.title)}" loading="lazy">` : `<div class="card-placeholder">📰</div>`}</div>
+    ${article.image ? `<div class="card-media"><img src="${esc(article.image)}" alt="${esc(article.title)}" loading="lazy"></div>` : ''}
     <div class="card-body">
       <div class="card-title">${esc(article.title)}</div>
       ${article.summary ? `<div class="card-summary">${esc(article.summary.substring(0, 130))}</div>` : ''}
     </div>`;
   const img = card.querySelector('img');
-  if (img) img.addEventListener('error', () => { card.querySelector('.card-media').innerHTML = '<div class="card-placeholder">📰</div>'; });
+  if (img) img.addEventListener('error', () => { const m = card.querySelector('.card-media'); if (m) m.remove(); });
   return card;
 }
 
@@ -42,9 +42,9 @@ function createMagItem(article, i) {
   const item = document.createElement('a');
   item.className = 'mag-item fade-in'; item.href = article.link || '#'; item.target = '_blank'; item.rel = 'noopener noreferrer';
   item.style.animationDelay = `${Math.min(i * 40, 400)}ms`;
-  item.innerHTML = `<div class="mag-item-imgwrap">${article.image ? `<img src="${esc(article.image)}" alt="${esc(article.title)}" loading="lazy">` : `<div class="mag-item-placeholder">📰</div>`}</div>
+  item.innerHTML = `${article.image ? `<div class="mag-item-imgwrap"><img src="${esc(article.image)}" alt="${esc(article.title)}" loading="lazy"></div>` : ''}
     <div class="mag-item-text"><div class="mag-item-cat">${esc(article.category || '')}</div><div class="mag-item-title">${esc(article.title)}</div></div>`;
-  const img = item.querySelector('img'); if (img) img.addEventListener('error', () => { item.querySelector('.mag-item-imgwrap').innerHTML = '<div class="mag-item-placeholder">📰</div>'; });
+  const img = item.querySelector('img'); if (img) img.addEventListener('error', () => { const m = item.querySelector('.mag-item-imgwrap'); if (m) m.remove(); });
   return item;
 }
 

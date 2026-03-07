@@ -8,7 +8,7 @@ const LS_KEY    = 'duix_preferred_view';
 const ALL_VIEWS = ['list','cards','magazine','ticker'];
 
 /* ════════════════════════════════════════════════════════════
-   SOURCES — 9 מקורות חדשות עם RSS + HTML fallback
+   SOURCES — 8 מקורות חדשות עם RSS + HTML fallback
 ════════════════════════════════════════════════════════════ */
 const SOURCES = [
   { name:'ynet',        label:'ynet',        rss:'https://www.ynet.co.il/Integration/StoryRss1854.xml',                                                          url:'https://www.ynet.co.il/' },
@@ -18,7 +18,6 @@ const SOURCES = [
   { name:'globes',      label:'גלובס',        rss:'https://www.globes.co.il/webservice/rss/rssfeeds.aspx?fid=585',                                                url:'https://www.globes.co.il/' },
   { name:'israelhayom', label:'ישראל היום',   rss:'https://www.israelhayom.co.il/rss.xml',                                                                        url:'https://www.israelhayom.co.il/' },
   { name:'maariv',      label:'מעריב',        rss:'https://www.maariv.co.il/Rss/RssChadashot',                                                                    url:'https://www.maariv.co.il/' },
-  { name:'rotter',      label:'רוטר.נט',      rss:'https://rotter.net/rss/rotternews.xml',                                                                        url:'https://rotter.net/forum/scoops.php' },
   { name:'davar',       label:'דבר',           rss:'https://www.davar1.co.il/feed/',                                                                               url:'https://www.davar1.co.il/' },
 ];
 
