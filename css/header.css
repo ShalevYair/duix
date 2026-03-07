@@ -23,19 +23,9 @@ header .duix-logo:hover { opacity:0.7; }
 .toggle-btn:hover:not(.active) { background:rgba(255,255,255,0.16); color:#fff; }
 .header-right { display:flex; align-items:center; gap:0.55rem; flex-shrink:0; }
 
-/* ── LIMIT SELECT (dropdown כמות כתבות) ── */
-.limit-select {
-  background:transparent; color:rgba(255,255,255,0.75);
-  border:1px solid rgba(255,255,255,0.22); border-radius:6px;
-  padding:3px 6px; font-size:0.72rem; font-family:inherit;
-  cursor:pointer; outline:none; transition:border-color 0.18s;
-  -webkit-appearance:none; appearance:none;
-  padding-left:1.4rem; padding-right:0.5rem;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:left 5px center;
-}
-.limit-select:focus { border-color:rgba(255,255,255,0.5); }
-.limit-select option { background:var(--header-bg); color:#fff; }
+/* ── LIMIT SELECT — מושבת, קוד שמור
+.limit-select { background:transparent; ... }
+*/
 
 /* ── SOURCE BAR ── */
 #source-bar {

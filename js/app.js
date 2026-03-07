@@ -1,15 +1,14 @@
 /* ════════════════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════════════════ */
-let articles     = [];
-let currentView  = 'list';
-let newsLoaded   = false;
-let articleLimit  = 30;     // כמות כתבות להצגה
-const LS_KEY     = 'duix_preferred_view';
-const ALL_VIEWS  = ['list','cards','magazine','ticker'];
+let articles    = [];
+let currentView = 'list';
+let newsLoaded  = false;
+const LS_KEY    = 'duix_preferred_view';
+const ALL_VIEWS = ['list','cards','magazine','ticker'];
 
 /* ════════════════════════════════════════════════════════════
-   SOURCES — 10 מקורות חדשות עם RSS + HTML fallback
+   SOURCES — 9 מקורות חדשות עם RSS + HTML fallback
 ════════════════════════════════════════════════════════════ */
 const SOURCES = [
   { name:'ynet',        label:'ynet',        rss:'https://www.ynet.co.il/Integration/StoryRss1854.xml',                                                          url:'https://www.ynet.co.il/' },
@@ -20,7 +19,6 @@ const SOURCES = [
   { name:'israelhayom', label:'ישראל היום',   rss:'https://www.israelhayom.co.il/rss.xml',                                                                        url:'https://www.israelhayom.co.il/' },
   { name:'maariv',      label:'מעריב',        rss:'https://www.maariv.co.il/Rss/RssChadashot',                                                                    url:'https://www.maariv.co.il/' },
   { name:'rotter',      label:'רוטר.נט',      rss:'https://rotter.net/rss/rotternews.xml',                                                                        url:'https://rotter.net/forum/scoops.php' },
-  { name:'n12',         label:'N12',           rss:'https://www.n12.co.il/rss/',                                                                                   url:'https://www.n12.co.il/' },
   { name:'davar',       label:'דבר',           rss:'https://www.davar1.co.il/feed/',                                                                               url:'https://www.davar1.co.il/' },
 ];
 
@@ -58,10 +56,11 @@ function addArticlesFromSource(newArts) {
   const existingTitles = new Set(articles.map(a => a.title));
   const fresh = newArts.filter(a => a.title && !existingTitles.has(a.title));
   if (!fresh.length) return;
+  const prevCount = articles.length;
   articles = [...articles, ...fresh];
   newsLoaded = true;
-  renderAll();
   setAppState('content');
+  appendToViews(fresh, prevCount);
 }
 
 async function loadOneSource(src) {
@@ -93,8 +92,9 @@ async function loadOneSource(src) {
 }
 
 async function loadAllSources() {
-  articles  = [];
+  articles   = [];
   newsLoaded = false;
+  renderAll(); // מנקה את כל התצוגות
   setAppState('loading');
   SOURCES.forEach(src => setSourceStatus(src.name, 'loading'));
 
@@ -127,14 +127,6 @@ function setAppState(state, msg) {
   document.getElementById('main-content').style.display = state === 'content' ? 'block' : 'none';
   if (msg) document.getElementById('error-msg').textContent = msg;
 }
-
-/* ════════════════════════════════════════════════════════════
-   ARTICLE LIMIT — dropdown כמות כתבות
-════════════════════════════════════════════════════════════ */
-document.getElementById('article-limit').addEventListener('change', function() {
-  articleLimit = parseInt(this.value, 10);
-  if (newsLoaded) renderAll();
-});
 
 /* ════════════════════════════════════════════════════════════
    VIEW TOGGLE
